@@ -1,3 +1,13 @@
 from django.shortcuts import render
+from django.contrib.auth.views import LoginView,LogoutView 
+from django.views.generic import CreateView ,ListView,UpdateView,DeleteView
+from django.contrib.auth.models import User
+from .forms import cuserform
 
-# Create your views here.
+class UserRegister(CreateView):
+    model=User
+    form_class=cuserform
+    template_name=
+
+
+
