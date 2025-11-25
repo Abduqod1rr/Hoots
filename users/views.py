@@ -7,7 +7,7 @@ from .forms import cuserform
 class UserRegister(CreateView):
     model=User
     form_class=cuserform
-    template_name=
+    template_name='register.html'
 
 
 
