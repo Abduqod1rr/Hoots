@@ -9,5 +9,8 @@ class UserRegister(CreateView):
     form_class=cuserform
     template_name='register.html'
 
+class Userlogin(LoginView):
+    template_name='login.html'
+
 
 
