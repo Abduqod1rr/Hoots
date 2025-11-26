@@ -9,3 +9,4 @@ from .models import Hoots ,Following
 class Homeview(ListView):
     model=Hoots
     template_name='home.html'
+    context_object_name='hoots'
