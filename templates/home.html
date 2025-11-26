@@ -1,0 +1,45 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Hoots</title>
+    <link rel="stylesheet" href="{% static 'home.css' %}">
+</head>
+<body>
+
+<div class="feed">
+
+    {% for h in object_list %}
+    <div class="hoot-card">
+
+        <div class="hoot-header">
+            <span class="owner">@{{ h.owner.username }}</span>
+            <span class="time">{{ h.posted_at|timesince }} ago</span>
+        </div>
+
+        {% if h.title %}
+        <div class="title">{{ h.title }}</div>
+        {% endif %}
+
+        {% if h.hoot %}
+        <div class="audio-box">
+            <audio controls>
+                <source src="{{ h.hoot.url }}" type="audio/mpeg">
+                Your browser does not support the audio element.
+            </audio>
+        </div>
+        {% endif %}
+
+        <div class="likes">
+            ❤️ {{ h.likes.count }} likes
+        </div>
+
+    </div>
+    {% endfor %}
+
+</div>
+
+</body>
+</html>

@@ -3,8 +3,9 @@ from django.contrib.auth.models import User
 
 
 class Hoots(models.Model):
-    owner=models.ForeignKey(User,on_delete=models.CASCADE)
+    owner=models.ForeignKey(User,on_delete=models.CASCADE,related_name='owner')
     title=models.CharField(max_length=20,default='no title')
+    likes=models.ManyToManyField(User,null=True,blank=True,related_name='likes')
     hoot=models.FileField(upload_to='posts', null=True)
     posted_at=models.DateTimeField(auto_now_add=True)
 
