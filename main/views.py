@@ -15,7 +15,7 @@ class Homeview(ListView):
 class createHoot(LoginRequiredMixin,CreateView):
     model = Hoots
     template_name = 'create_hoot.html'
-    success_url = reverse_lazy('home'),
+    success_url = reverse_lazy('home')
     fields=['title','hoot']
 
     def form_valid(self, form):
