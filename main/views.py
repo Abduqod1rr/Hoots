@@ -21,7 +21,17 @@ class createHoot(LoginRequiredMixin,CreateView):
     def form_valid(self, form):
         form.instance.owner=self.request.user
         return super().form_valid(form)
+
+class myhootsview(ListView):
+    model=Hoots
+    template_name='home.html'
+    context_object_name='hoots'
+
+    def get_queryset(self):
+        return Hoots.objects.filter(owner=self.request.user) 
     
+
+#todo:finish it
 class deleteHoot(LoginRequiredMixin,DeleteView):
     model=Hoots
     success_url=reverse_lazy('home')

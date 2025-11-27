@@ -5,7 +5,8 @@ from django.conf import settings
 
 urlpatterns = [
     path("", views.Homeview.as_view(), name="home"),
-    path("choot/", views.createHoot.as_view(), name="choot")
+    path("choot/", views.createHoot.as_view(), name="choot"),
+    path("myhoots/", views.myhootsview.as_view(), name="myhoots") #add button on home page!!!!
 ]
 
 if settings.DEBUG:
