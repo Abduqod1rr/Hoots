@@ -4,7 +4,8 @@ from django.conf.urls.static import static
 from django.conf import settings
 
 urlpatterns = [
-    path("", views.Homeview.as_view(), name="home")
+    path("", views.Homeview.as_view(), name="home"),
+    path("choot/", views.createHoot.as_view(), name="choot")
 ]
 
 if settings.DEBUG:
