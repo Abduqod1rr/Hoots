@@ -1,0 +1,28 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Delete Hoot</title>
+    <link rel="stylesheet" href="{% static 'myhoots.css' %}">
+</head>
+<body>
+
+<div class="delete-box">
+    <h2>Delete Hoot?</h2>
+
+    <p class="confirm-text">
+        Are you sure you want to delete:
+        <strong>"{{ object.title }}"</strong> ?
+    </p>
+
+    <form method="post">
+        {% csrf_token %}
+        <button type="submit" class="btn-delete">Yes, delete</button>
+        <a href="{% url 'myhoots' %}" class="btn-edit">Cancel</a>
+    </form>
+</div>
+
+</body>
+</html>

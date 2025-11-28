@@ -1,0 +1,48 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>My Hoots</title>
+    <link rel="stylesheet" href="{% static 'myhoots.css' %}">
+</head>
+<body>
+
+<h2 class="myhoots-title">My Hoots</h2>
+
+<div class="feed">
+
+    {% for h in hoots %}
+    <div class="hoot-card">
+
+        <div class="hoot-header">
+            <span class="owner">@{{ h.owner.username }}</span>
+            <span class="time">{{ h.posted_at }}</span>
+        </div>
+
+        {% if h.title %}
+        <div class="title">{{ h.title }}</div>
+        {% endif %}
+
+        {% if h.hoot %}
+        <div class="audio-box">
+            <audio controls>
+                <source src="{{ h.hoot.url }}" type="audio/mpeg">
+                Your browser does not support audio.
+            </audio>
+        </div>
+        {% endif %}
+
+        <div class="controls">
+            <a class="btn-edit" href="{% url 'update' h.id %}">Edit</a>
+            <a class="btn-delete" href="{% url 'delete' h.id %}">Delete</a>
+        </div>
+
+    </div>
+    {% endfor %}
+
+</div>
+
+</body>
+</html>

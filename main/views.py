@@ -5,6 +5,8 @@ from django.contrib.auth.views import LoginView,LogoutView
 from django.views.generic import CreateView ,ListView,UpdateView,DeleteView
 from django.contrib.auth.mixins import LoginRequiredMixin
 from .models import Hoots ,Following
+from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
+
 
 
 class Homeview(ListView):
@@ -32,20 +34,24 @@ class myhootsview(ListView):
     
 
 
-class deleteHoot(LoginRequiredMixin,DeleteView):
+class deleteHoot(LoginRequiredMixin,UserPassesTestMixin,DeleteView):
     model=Hoots
-    template_name='myhoots.html'
+    template_name='delete_hoot.html'
     success_url=reverse_lazy('home')
+    context_object_name='hoots'
 
     def test_func(self):
-        obj=get_object_or_404()
+        obj=self.get_object()
         return self.request.user == obj.owner
     
-class updateHoot(LoginRequiredMixin,UpdateView):
+class updateHoot(LoginRequiredMixin,UserPassesTestMixin,UpdateView):
     model = Hoots
     fields=['title','hoot']
+    template_name='create_hoot.html'
     success_url = reverse_lazy('myhoots')
+    context_object_name='hoots'
+    
 
     def test_func(self):
-        obj=get_object_or_404()
+        obj=self.get_object()
         return self.request.user == obj.owner
