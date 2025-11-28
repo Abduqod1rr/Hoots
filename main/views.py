@@ -24,17 +24,27 @@ class createHoot(LoginRequiredMixin,CreateView):
 
 class myhootsview(ListView):
     model=Hoots
-    template_name='home.html'
+    template_name='myhoots.html'
     context_object_name='hoots'
 
     def get_queryset(self):
         return Hoots.objects.filter(owner=self.request.user) 
     
 
-#todo:finish it
+
 class deleteHoot(LoginRequiredMixin,DeleteView):
     model=Hoots
+    template_name='myhoots.html'
     success_url=reverse_lazy('home')
+
+    def test_func(self):
+        obj=get_object_or_404()
+        return self.request.user == obj.owner
+    
+class updateHoot(LoginRequiredMixin,UpdateView):
+    model = Hoots
+    fields=['title','hoot']
+    success_url = reverse_lazy('myhoots')
 
     def test_func(self):
         obj=get_object_or_404()
