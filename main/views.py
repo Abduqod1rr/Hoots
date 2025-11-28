@@ -1,6 +1,6 @@
-from django.shortcuts import render, HttpResponse
+from django.shortcuts import render, HttpResponse ,redirect
 from django.shortcuts import render ,get_object_or_404
-from django.urls import reverse_lazy
+from django.urls import reverse_lazy 
 from django.contrib.auth.views import LoginView,LogoutView 
 from django.views.generic import CreateView ,ListView,UpdateView,DeleteView
 from django.contrib.auth.mixins import LoginRequiredMixin
@@ -55,3 +55,13 @@ class updateHoot(LoginRequiredMixin,UserPassesTestMixin,UpdateView):
     def test_func(self):
         obj=self.get_object()
         return self.request.user == obj.owner
+    
+def toggle_like(request,pk):
+    hoot=get_object_or_404(Hoots,pk=pk)
+
+    if not request.user in hoot.likes.all():
+        hoot.likes.add(request.user)
+    else:
+        hoot.likes.remove(request.user)
+
+    return redirect('home')
